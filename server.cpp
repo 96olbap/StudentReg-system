@@ -14,3 +14,14 @@ class StudentRegistration {
 public:
   void registerStudent(const std::string& studentDetails);
 };
+
+// Server stub
+class StudentRegistrationServer {
+public:
+  void registerStudent(const std::string& studentDetails) {
+    static int serialNumber = 1;
+    std::ofstream outFile("registered_students.txt", std::ios_base::app);
+    outFile << serialNumber << " " << studentDetails << std::endl;
+    ++serialNumber;
+  }
+};
