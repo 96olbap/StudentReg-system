@@ -44,5 +44,33 @@ int main() {
     // Instantiate the server stub
     StudentRegistrationServer server;
 
-    
+    // Process incoming requests
+    while (true) {
+    // Accept a new connection
+    int connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
+
+    // Read the request from the client
+    char buffer[1024];
+    int n = recv(connfd, buffer, sizeof(buffer), 0);
+    buffer[n] = '\0';
+    std::string request(buffer);
+
+    // Parse the request and call the appropriate server method
+    if (request.substr(0, 8) == "register") {
+      std::string studentDetails = request.substr(9);
+      server.registerStudent(studentDetails);
+
+      // Send a reply to the client
+      std::string reply = "Registration successful";
+      send(connfd, reply.c_str(), reply.length(), 0);
+    }
+
+    // Close the connection
+    close(connfd);
+  }
+
+  // Close the listening socket
+  close(listenfd);
+
+  return 0;
 }
