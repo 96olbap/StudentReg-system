@@ -37,4 +37,12 @@ int main() {
     servaddr.sin_addr.s_addr = INADDR_ANY;
     servaddr.sin_port = htons(8080);
     bind(listenfd, (const struct sockaddr *)&servaddr, sizeof(servaddr));
+
+    // Listen for incoming connections
+    listen(listenfd, 5);  //maximum number of connections that can be queued is 5
+
+    // Instantiate the server stub
+    StudentRegistrationServer server;
+
+    
 }
