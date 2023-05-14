@@ -44,3 +44,19 @@ public:
     close(sockfd);
   }
 };
+
+// Client program
+int main() {
+  // Instantiate the client stub
+  StudentRegistrationClient client;
+
+  // Read student details from the user
+  std::cout << "Enter student details: ";
+  std::string studentDetails;
+  std::getline(std::cin, studentDetails);
+
+  // Register the student through the client stub
+  client.registerStudent(studentDetails);
+
+  return 0;
+}
