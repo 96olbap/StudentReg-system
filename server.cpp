@@ -25,3 +25,9 @@ public:
     ++serialNumber;
   }
 };
+
+// Server program
+int main() {
+    // Create a TCP socket
+    int listenfd = socket(AF_INET, SOCK_STREAM, 0);
+}
